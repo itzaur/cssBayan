@@ -16,11 +16,12 @@
 
 html {
   font-size: 62.5%;
-  scroll-behavior: smooth;
 }
 
 body {
   box-sizing: border-box;
+
+  min-height: 100vh;
 
   display: grid;
   place-items: center;
@@ -44,8 +45,9 @@ body {
 
 img,
 picture {
-  max-width: 100%;
   display: block;
+  max-width: 100%;
+  height: 100%;
 }
 
 /*
@@ -59,8 +61,6 @@ picture {
 
   width: 90%;
   max-width: 80rem;
-
-  margin-block: 3rem;
 }
 
 .accordion-title {
@@ -95,17 +95,17 @@ picture {
   overflow: hidden;
 
   transition: max-height var(--transition-duration) linear,
-    box-shadow var(--transition-duration) ease-out; /*hover out*/
+    box-shadow var(--transition-duration) ease-out; /* hover out */
 }
 
 .accordion-item__content figure {
-  margin-block: min(var(--accordion-gap), 2vw);
+  padding-block: min(var(--accordion-gap), 2vw);
 
   scale: 0 0;
 
   opacity: 0;
 
-  transform-origin: center center;
+  transform-origin: center top;
 
   transition: scale var(--transition-duration) linear,
     opacity var(--transition-duration) ease-in, filter 0.3s linear; /* scale down */
@@ -182,14 +182,13 @@ label {
 
   input:not(:checked):hover ~ .accordion-item__content,
   .item:hover > .accordion-item__content {
-    height: fit-content;
     max-height: max(30rem, 100vh);
 
     box-shadow: inset 0 1.1rem 0.8rem -1rem var(--clr-shadow),
       inset 0 -1.1rem 0.8rem -1rem var(--clr-shadow);
 
     transition: max-height var(--transition-duration) linear,
-      box-shadow var(--transition-duration) ease-out; /*hover up*/
+      box-shadow var(--transition-duration) ease-out; /* hover up */
   }
 
   input:not(:checked):hover ~ .accordion-item__content > figure {
@@ -201,8 +200,7 @@ label {
 
     transform-origin: top center;
 
-    transition: scale var(--transition-duration)
-        cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    transition: scale 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
       opacity var(--transition-duration) ease-in; /* scale up */
   }
 }
@@ -220,7 +218,6 @@ input:checked + label {
 }
 
 input:checked ~ .accordion-item__content {
-  height: fit-content;
   max-height: max(30rem, 100vh);
 
   box-shadow: inset 0 1.1rem 0.8rem -1rem var(--clr-shadow),
@@ -287,6 +284,8 @@ input:checked ~ .accordion-item__icon {
   /* 320px */
   .accordion {
     width: 90%;
+
+    margin-block: 4vw;
   }
 
   .accordion-item__icon {
